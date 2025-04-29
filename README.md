@@ -115,6 +115,8 @@ The project includes a Dockerfile for containerization, making it easy to deploy
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🤝 Contributing
+## 🤝 Acknowledgement
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+A big shoutout to the @**AI Makerspace** for all making this possible. Couldn't have done it without the incredible community there. 🤗🙏
+
+Looking forward to building with the community! 🙌✨ Here's to many more creations ahead! 🥂🎉
