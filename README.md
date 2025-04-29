@@ -111,10 +111,6 @@ The project includes a Dockerfile for containerization, making it easy to deploy
 - Never commit your `.env` file to version control
 - Use secrets management when deploying to production environments
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 🤝 Acknowledgement
 
 A big shoutout to the @**AI Makerspace** for all making this possible. Couldn't have done it without the incredible community there. 🤗🙏
