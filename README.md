@@ -1,6 +1,10 @@
-# Huggingface LLM Application
+# LLM-Chainlit Chat Application
 
 A streamlined chatbot application built with Chainlit and OpenAI's GPT-3.5 Turbo, designed to provide helpful responses in a pleasant conversational tone.
+
+View application [here](https://huggingface.co/spaces/ovokpus/llm-app)
+
+![image](image/chainlit.png)
 
 ## 🌟 Features
 
