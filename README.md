@@ -1,5 +1,7 @@
 # LLM Chainlit Chat
 
+<p align="center"><img src="docs/assets/hero.svg" alt="LLM Chainlit Chat" width="100%"/></p>
+
 **A small streaming chatbot: Chainlit's React chat UI in front of OpenAI GPT-3.5 Turbo.**
 
 It answers in a pleasant tone and thinks step by step. Everything is one `app.py`, about 100 lines. There is also a live demo on [Hugging Face Spaces](https://huggingface.co/spaces/ovokpus/llm-app).
@@ -13,6 +15,8 @@ It answers in a pleasant tone and thinks step by step. Everything is one `app.py
 It's a minimal, readable starting point for an LLM chat app. Chainlit provides the chat frontend (a React app shipped inside the Python package), streaming and sessions, so the code is only prompt templates plus one OpenAI call.
 
 ## 2. How it works
+
+<p align="center"><img src="docs/assets/flow.svg" alt="LLM Chainlit Chat data flow" width="100%"/></p>
 
 ```mermaid
 sequenceDiagram
