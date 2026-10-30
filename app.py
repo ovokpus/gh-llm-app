@@ -2,7 +2,7 @@
 
 # OpenAI Chat completion
 import os
-from openai import AsyncOpenAI  # importing openai for API usage
+from openai import AsyncOpenAI, AuthenticationError  # importing openai for API usage
 import chainlit as cl  # importing chainlit for our app
 from chainlit.prompt import Prompt, PromptMessage  # importing prompt tools
 from chainlit.playground.providers import ChatOpenAI  # importing ChatOpenAI tools
@@ -17,6 +17,16 @@ system_template = """You are a helpful assistant who always speaks in a pleasant
 user_template = """{input}
 Think through your response step by step.
 """
+
+NO_KEY_MESSAGE = (
+    "No OpenAI API key is configured, so no reply was generated. "
+    "Set OPENAI_API_KEY in .env and restart the app."
+)
+REJECTED_KEY_MESSAGE = "OpenAI rejected the configured API key, so no reply was generated."
+
+
+def has_api_key() -> bool:
+    return bool(os.environ.get("OPENAI_API_KEY", "").strip())
 
 
 @cl.on_chat_start  # marks a function that will be executed at the start of a user session
@@ -36,6 +46,11 @@ async def start_chat():
 @cl.on_message  # marks a function that should be run each time the chatbot receives a message from a user
 async def main(message: cl.Message):
     settings = cl.user_session.get("settings")
+
+    # Honest no-key state: say so instead of failing with a stack trace.
+    if not has_api_key():
+        await cl.Message(content=NO_KEY_MESSAGE).send()
+        return
 
     client = AsyncOpenAI()
 
@@ -64,10 +79,15 @@ async def main(message: cl.Message):
     msg = cl.Message(content="")
 
     # Call OpenAI
-    async for stream_resp in await client.chat.completions.create(
-        messages=[m.to_openai() for m in prompt.messages], stream=True, **settings
-    ):
-        token = stream_resp.choices[0].delta.content
+    try:
+        stream = await client.chat.completions.create(
+            messages=[m.to_openai() for m in prompt.messages], stream=True, **settings
+        )
+    except AuthenticationError:
+        await cl.Message(content=REJECTED_KEY_MESSAGE).send()
+        return
+    async for stream_resp in stream:
+        token = stream_resp.choices[0].delta.content if stream_resp.choices else ""
         if not token:
             token = ""
         await msg.stream_token(token)
