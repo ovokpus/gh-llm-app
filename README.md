@@ -10,6 +10,10 @@ It answers in a pleasant tone and thinks step by step. Everything is one `app.py
 
 ---
 
+## Business case
+
+Teams often spend days on chat interfaces before they can test whether a prompt is useful. This starter is a streaming chatbot in about 100 lines of Python, with Chainlit providing the interface. Its value is a faster first prototype. [docs/BUSINESS_CASE.md](docs/BUSINESS_CASE.md) explains the case honestly.
+
 ## 1. Why it exists
 
 It's a minimal, readable starting point for an LLM chat app. Chainlit provides the chat frontend (a React app shipped inside the Python package), streaming and sessions, so the code is only prompt templates plus one OpenAI call.
